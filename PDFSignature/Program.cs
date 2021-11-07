@@ -8,7 +8,7 @@ using PDFSignature;
 if (args.Length != 2)
 {
     Console.WriteLine("Invalid args");
-    args = new[] { "/Users/alexhome/Projects/PDFSignature/PDFSignature/sample.pdf", "2" };
+    args = new[] { "/Users/alexhome/Downloads/DoEveryStupidThing.pdf", "12" };
 }
 string inputFile = args[0];
 int.TryParse(args[1], out int sigCount);
@@ -28,9 +28,12 @@ while ((pageCount = sourceDoc.GetNumberOfPages()) % 4 != 0)
     sourceDoc.AddNewPage();
 }
 sourceDoc.Close();
+if (sigCount * 4 > pageCount)
+{
+    throw new ArgumentException("Too many signatures.");
+}
 IRandomAccessSource source = new RandomAccessSourceFactory().CreateSource(sourceStream.ToArray());
 sourceDoc = new(new PdfReader(source, new()));
-int sigPageCount = (int)Math.Ceiling((decimal)pageCount / (decimal)sigCount);
 
 // So, we have the total number of sigs, and the number of pages in each sig.
 // Split pages by sig, then reorder the pages in each sig.
