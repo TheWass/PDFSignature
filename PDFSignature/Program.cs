@@ -8,7 +8,7 @@ using PDFSignature;
 if (args.Length != 2)
 {
     Console.WriteLine("Invalid args");
-    args = new[] { "/Users/alexhome/Downloads/DoEveryStupidThing.pdf", "12" };
+    args = new[] { "/Users/alexhome/Downloads/AskingPrice.pdf", "2" };
 }
 string inputFile = args[0];
 int.TryParse(args[1], out int sigCount);
